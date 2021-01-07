@@ -1,0 +1,50 @@
+{
+  "name": "platform",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/lib/index.js",
+  "scripts": {
+    "build:client": "webpack",
+    "build:server": "babel ./server/src -d ./server/lib",
+    "dev": "concurrently -k \"npm run watch:client\" \"npm run watch:server\" \"nodemon --watch server/lib --delay 2\"",
+    "prepare": "npm run build:server",
+    "start": "source .env && npm run build:client && npm run build:server && npm run start:server",
+    "start:server": "node server/lib/index.js",
+    "watch:client": "webpack --watch",
+    "watch:server": "babel ./server/src -w -d ./server/lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lydiaggoodson/platform"
+  },
+  "author": "Lydia Goodson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lydiaggoodson/platform/issues"
+  },
+  "homepage": "https://github.com/lydiaggoodson/platform#readme",
+  "dependencies": {
+    "@babel/polyfill": "^7.11.5",
+    "core-js": "^3.6.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.11.6",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "concurrently": "^5.3.0",
+    "css-loader": "^5.0.1",
+    "node-sass": "^5.0.0",
+    "nodemon": "^2.0.4",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
