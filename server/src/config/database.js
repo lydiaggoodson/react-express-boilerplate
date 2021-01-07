@@ -20,11 +20,11 @@ const getConnection = () => {
     });
 };
 
-const executeQuery = (sql) => {
+const executeQuery = (sql, args = []) => {
     return getConnection()
     .then((connection) => {
         return new Promise((resolve, reject) => {
-            connection.query(sql, (err, result) => {
+            connection.query(sql, args, (err, result) => {
                 connection.release();
                 if (err) {
                     reject(err)
@@ -41,9 +41,9 @@ const generatePlaceholders = (args = []) => {
     if (args.length > 0) {
         for (let i = 0; i < args.length; i++) {
             if (i === args.length - 1) { 
-                placeholders += `${args[i]}`;
+                placeholders += `'${args[i]}'`;
             } else {
-                placeholders += `${args[i]}, `;
+                placeholders += `'${args[i]}', `;
             }
         }
     }
